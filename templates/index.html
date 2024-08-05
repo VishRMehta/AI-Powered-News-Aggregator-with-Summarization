@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Aggregator</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-3">
+        <h1>News Aggregator</h1>
+    </header>
+    <div class="container mt-4">
+        <div class="row">
+            {% for article in articles %}
+              <div class="col-md-4 mb-4">
+                  <div class="card shadow-sm">
+                      <div class="card-body">
+                        <a href="{{ article.url }}" target="_blank">
+                          <h5 class="card-title">{{ article.title }}</h5>
+                        </a>
+                          <p class="card-text">{{ article.summary }}</p>
+                      </div>
+                  </div>
+              </div>
+            {% endfor %}
+        </div>
+    </div>
+    <footer class="bg-primary text-white text-center py-3 mt-4">
+        <p>&copy; 2024 News Aggregator. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
