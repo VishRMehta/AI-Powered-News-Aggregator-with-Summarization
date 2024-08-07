@@ -42,7 +42,7 @@ def fetch_articles(sources, max_articles_per_source=10):
     return all_articles
 
 if __name__ == "__main__":
-    sources = ['https://cnn.com', 'https://bbc.com', 'https://techcrunch.com']
+    sources = ['https://cnn.com', 'https://bbc.com', 'https://techcrunch.com', 'https://www.bloomberg.com/uk', 'https://www.cnbc.com/world/?region=worldpyt']
     all_articles = fetch_articles(sources)
     with open('articles.json', 'w') as f:
         json.dump(all_articles, f, indent=4)
