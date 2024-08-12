@@ -87,7 +87,3 @@ Selects top n sentences to create a summary.
 
 Transforms text data into TF-IDF vectors.
 Applies KMeans clustering to categorize articles into topics.
-
-### Handling Paywalls:
-
-The tool uses a rotating user-agent strategy to bypass basic paywalls. It simulates different browser requests to avoid detection and scraping restrictions.
