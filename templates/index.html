@@ -21,8 +21,42 @@
             <h1 class="mb-0"><i class="fas fa-newspaper"></i> News Aggregator</h1>
         </div>
     </header>
+
+    <div class="container mt-4 text-center">
+        <p class="lead">Enter the URLs of the websites you want to fetch articles from.</p>
+        <p class="text-muted">If you're not sure where to fetch from, just hit the 'Fetch Summaries' button for the default collection of news.</p>
+
+    </div>
+
     <div class="container mt-4">
-        <div class="row" data-masonry='{"percentPosition": true }'>
+        <div class="row">
+            <!-- URL Input Form -->
+            <div class="col-12 mb-4">
+                <form id="url-form" method="POST" action="/scrape-articles">
+                    <div class="form-row align-items-center">
+                        <div class="col-md-9 mb-2 mb-md-0">
+                            <input type="text" class="form-control" id="urls" name="urls" placeholder="https://cnn.com, https://bbc.com">
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-secondary w-100">Fetch Summaries</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Loading Animation -->
+        <div class="row justify-content-center" id="loading" style="display:none;">
+            <div class="col-12 text-center">
+                <div class="spinner-border text-secondary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <p class="mt-2">Fetching articles... Please wait.</p>
+            </div>
+        </div>
+
+        <!-- Articles Grid -->
+        <div class="row" id="articles-grid" data-masonry='{"percentPosition": true }'>
             {% for article in articles %}
               <div class="col-md-4 mb-4">
                   <div class="card shadow-sm">
@@ -37,6 +71,7 @@
             {% endfor %}
         </div>
     </div>
+
     <footer class="bg-dark text-white text-center py-3 mt-4">
         <p>&copy; 2024 News Aggregator. All rights reserved.</p>
     </footer>
@@ -47,5 +82,44 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Masonry JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
+
+    <!-- Custom Script for Showing Loading Animation -->
+    <script>
+
+        document.getElementById('urls').addEventListener('focus', function() {
+            if (this.value.trim() === '') {
+                this.value = 'https://';
+                this.setSelectionRange(this.value.length, this.value.length); // Move cursor to end
+            }
+        });
+   
+        function validateUrls() {
+            const urlInput = document.getElementById('urls').value;
+            const urls = urlInput.split(',').map(url => url.trim());
+
+            // Regex for basic URL validation (simplified)
+            const urlPattern = /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/.*)?$/;
+            let allValid = true;
+
+            urls.forEach(url => {
+                if (url && !urlPattern.test(url)) {
+                    allValid = false;
+                    alert('Invalid URL format: ' + url);
+                }
+            });
+
+            return allValid;
+        }
+
+        document.getElementById('url-form').onsubmit = function() {
+            event.preventDefault();
+            if (validateUrls()) {
+                document.getElementById('loading').style.display = 'block';
+                document.getElementById('articles-grid').style.display = 'none';
+                this.submit();
+            }
+        }
+    </script>
+
 </body>
 </html>
