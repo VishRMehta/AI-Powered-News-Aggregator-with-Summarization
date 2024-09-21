@@ -2,6 +2,8 @@
 
 This project is a comprehensive solution for summarizing and categorizing news articles from various online sources. It employs advanced NLP and machine learning techniques to streamline news content, making it more accessible and easier to analyze.
 
+![SS1](https://github.com/VishRMehta/AI-Powered-News-Aggregator-with-Summarization/blob/master/Project_Thumbnail.png)
+
 ---
 
 ## Features
@@ -85,7 +87,3 @@ Selects top n sentences to create a summary.
 
 Transforms text data into TF-IDF vectors.
 Applies KMeans clustering to categorize articles into topics.
-
-### Handling Paywalls:
-
-The tool uses a rotating user-agent strategy to bypass basic paywalls. It simulates different browser requests to avoid detection and scraping restrictions.
